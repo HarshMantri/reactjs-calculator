@@ -18,6 +18,7 @@ class App extends Component {
     input.removeAttribute("disabled");
     input.value = "";
     input.setAttribute("disabled", "disabled");
+    this.setState({ numOpenedBrackets: 0 });
   };
 
   onOpenBracket = () => {

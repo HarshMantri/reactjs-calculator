@@ -6,13 +6,12 @@ class Brackets extends Component {
 
     this.state = {
       value: this.props.value,
-      numOpenedBrackets: this.props.numOpenedBrackets,
     };
   }
 
   sanitizeInput = () => {
     if (this.state.value === ")") {
-      if (this.state.numOpenedBrackets !== 0) {
+      if (this.props.numOpenedBrackets > 0) {
         this.props.onCloseBracket();
         return true;
       } else {
