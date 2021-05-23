@@ -22,6 +22,13 @@ class Operands extends Component {
   };
 
   evaluateExpr = (input) => {
+    if (this.props.numOpenedBrackets > 0) {
+      input.removeAttribute("disabled");
+      for (let i = 0; i < this.props.numOpenedBrackets; i++) {
+        input.value += ")";
+      }
+      input.setAttribute("disabled", "disabled");
+    }
     //Do the evaluation
     let expr = input.value;
     // eslint-disable-next-line
@@ -31,6 +38,8 @@ class Operands extends Component {
     input.removeAttribute("disabled");
     input.value = ans;
     input.setAttribute("disabled", "disabled");
+
+    this.props.clearOpenedBrackets();
   };
 
   clickHandler = (e) => {

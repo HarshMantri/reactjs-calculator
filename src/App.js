@@ -18,9 +18,11 @@ class App extends Component {
     input.removeAttribute("disabled");
     input.value = "";
     input.setAttribute("disabled", "disabled");
+    this.clearOpenedBrackets();
+  };
+  clearOpenedBrackets = () => {
     this.setState({ numOpenedBrackets: 0 });
   };
-
   onOpenBracket = () => {
     this.setState({ numOpenedBrackets: this.state.numOpenedBrackets + 1 });
   };
@@ -38,7 +40,14 @@ class App extends Component {
     let operands = [];
     let ops = ["+", "-", "*", "/", "="];
     for (let op of ops) {
-      operands.push(<Operands key={op} value={op} />);
+      operands.push(
+        <Operands
+          key={op}
+          value={op}
+          numOpenedBrackets={this.state.numOpenedBrackets}
+          clearOpenedBrackets={this.clearOpenedBrackets}
+        />
+      );
     }
     let brackets = [];
     let bracks = ["(", ")"];
