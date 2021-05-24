@@ -10,10 +10,11 @@ class Brackets extends Component {
   }
 
   sanitizeInput = () => {
+    let input = document.getElementById("inputField");
     //don't allow empty brackets in expression
     if (this.state.value === ")") {
-      let badPredecessor = new Set("+", "-", "*", "/", ")");
-      let input = document.getElementById("inputField");
+      let badPredecessor = new Set(["+", "-", "*", "/", "("]);
+
       if (badPredecessor.has(input.value[input.value.length - 1])) {
         return false;
       }
@@ -26,7 +27,6 @@ class Brackets extends Component {
       }
     } else {
       let goodPredecessor = new Set(["+", "-", "*", "/", "("]);
-      let input = document.getElementById("inputField");
       if (
         input.value.length !== 0 &&
         !goodPredecessor.has(input.value[input.value.length - 1])
