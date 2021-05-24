@@ -17,7 +17,8 @@
   width: 90vw;
 }
 .numbers,
-.operands {
+.operands,
+.brackets {
   background-color: #4caf50; /* Green */
   border: 2px solid black;
   color: white;

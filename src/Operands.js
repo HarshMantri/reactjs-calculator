@@ -10,6 +10,9 @@ class Operands extends Component {
   }
 
   inputSanity = (inputText) => {
+    if (inputText.length === 0) {
+      return false;
+    }
     let lastChar = inputText[inputText.length - 1];
     let badChar = new Set(["+", "-", "*", "/", "="]);
     if (badChar.has(lastChar)) {
@@ -41,10 +44,12 @@ class Operands extends Component {
         input.setAttribute("disabled", "disabled");
       }
     } else {
-      input.removeAttribute("disabled");
-      input.value = input.value.substring(0, input.value.length - 1);
-      input.value += this.state.value;
-      input.setAttribute("disabled", "disabled");
+      if (!input.value.length === 0) {
+        input.removeAttribute("disabled");
+        input.value = input.value.substring(0, input.value.length - 1);
+        input.value += this.state.value;
+        input.setAttribute("disabled", "disabled");
+      }
     }
   };
 

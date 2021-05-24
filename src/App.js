@@ -1,14 +1,30 @@
 import React, { Component } from "react";
 import Numbers from "./Numbers";
 import Operands from "./Operands";
+import Brackets from "./Brackets";
 import "./css/App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      numOpenedBrackets: 0,
+    };
+  }
+
   clearBtnClicked = (e) => {
     let input = document.getElementById("inputField");
     input.removeAttribute("disabled");
     input.value = "";
     input.setAttribute("disabled", "disabled");
+  };
+
+  onOpenBracket = () => {
+    this.setState({ numOpenedBrackets: this.state.numOpenedBrackets + 1 });
+  };
+  onCloseBracket = () => {
+    this.setState({ numOpenedBrackets: this.state.numOpenedBrackets - 1 });
   };
 
   render() {
@@ -23,6 +39,19 @@ class App extends Component {
     for (let op of ops) {
       operands.push(<Operands key={op} value={op} />);
     }
+    let brackets = [];
+    let bracks = ["(", ")"];
+    for (let bracket of bracks) {
+      brackets.push(
+        <Brackets
+          key={bracket}
+          value={bracket}
+          numOpenedBrackets={this.state.numOpenedBrackets}
+          onOpenBracket={this.onOpenBracket}
+          onCloseBracket={this.onCloseBracket}
+        />
+      );
+    }
 
     return (
       <div className="App">
@@ -32,6 +61,7 @@ class App extends Component {
           <section className="buttons">
             {nums}
             {operands}
+            {brackets}
           </section>
           <section className="clear">
             <button
