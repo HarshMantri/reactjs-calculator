@@ -10,7 +10,14 @@ class Brackets extends Component {
   }
 
   sanitizeInput = () => {
+    //don't allow empty brackets in expression
     if (this.state.value === ")") {
+      let badPredecessor = new Set([")"]);
+      let input = document.getElementById("inputField");
+      if (badPredecessor.has(input.value[input.value.length - 1])) {
+        return false;
+      }
+
       if (this.props.numOpenedBrackets > 0) {
         this.props.onCloseBracket();
         return true;
