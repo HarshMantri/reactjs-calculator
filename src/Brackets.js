@@ -18,6 +18,14 @@ class Brackets extends Component {
         return false;
       }
     } else {
+      let goodPredecessor = new Set(["+", "-", "*", "/", "("]);
+      let input = document.getElementById("inputField");
+      if (
+        input.value.length !== 0 &&
+        !goodPredecessor.has(input.value[input.value.length - 1])
+      ) {
+        return false;
+      }
       this.props.onOpenBracket();
       return true;
     }

@@ -9,11 +9,22 @@ class Numbers extends Component {
     };
   }
 
-  clickHandler = (e) => {
+  sanitizeInput = () => {
+    let badPredecessor = new Set([")"]);
     let input = document.getElementById("inputField");
-    input.removeAttribute("disabled");
-    input.value += this.state.value;
-    input.setAttribute("disabled", "disabled");
+    if (badPredecessor.has(input.value[input.value.length - 1])) {
+      return false;
+    }
+    return true;
+  };
+
+  clickHandler = (e) => {
+    if (this.sanitizeInput()) {
+      let input = document.getElementById("inputField");
+      input.removeAttribute("disabled");
+      input.value += this.state.value;
+      input.setAttribute("disabled", "disabled");
+    }
   };
   render() {
     return (
